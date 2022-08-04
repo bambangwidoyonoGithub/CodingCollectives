@@ -34,8 +34,6 @@
             });
         });
         function OnSuccess(response) {
-            alert("Error: "+response.d);
-            alert("Error: "+response.d.EmployeeName);
             $("#gvEmployee").DataTable(
             {
                 bLengthChange: true,
