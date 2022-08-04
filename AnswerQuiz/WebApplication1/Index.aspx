@@ -13,29 +13,33 @@
     <script type="text/javascript" src="Script/JavaScript/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="Script/CSS/bootstrap.min.css" />
     <link  rel="stylesheet" type="text/css" href="Script/CSS/jquery.dataTables.css"/>
+    <link  rel="stylesheet" type="text/css" href="Script/CSS/jquery.dataTables.min.css"/>
     
     <script type="text/javascript">
+        
         $(function () {
             $.ajax({
                 type: "GET",
-                url: "Index.aspx/GetListEmployee",
+                url: "Index.aspx/GetListEmployeeFix",
                 data: '{}',
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: OnSuccess,
                 failure: function (response) {
-                    alert(response.d);
+                    alert(response);
                 },
                 error: function (response) {
-                    alert(response.d);
+                    alert(response);
                 }
             });
         });
         function OnSuccess(response) {
+            alert("Error: "+response.d);
+            alert("Error: "+response.d.EmployeeName);
             $("#gvEmployee").DataTable(
             {
                 bLengthChange: true,
-                lengthMenu: [[5, 10, -1], [5]],
+                lengthMenu: [[5, 10, -1], [5, 10, "All"]],
                 bFilter: true,
                 bSort: true,
                 bPaginate: true,
@@ -45,6 +49,7 @@
                           { 'data': 'Salary'}]
             });
         };
+        
     </script>
     <form id="form1" runat="server" class="tab-content">
         <div class="navbar-header">
@@ -64,6 +69,7 @@
                     </Columns>
                 </asp:GridView>
             </div>
+            <br />
         </div>
     </form>
 </body>

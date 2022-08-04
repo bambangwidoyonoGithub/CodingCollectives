@@ -93,22 +93,23 @@ namespace WebApplication1
             return JSONString;
         }
 
-        //public static string GetListEmployee()
-        //{
-        //    string xresult = "";
-        //    Employee xEmployeeClass = new Employee();
-        //    //List<Employee> ListEmployee = new List<Employee>();
-        //    //ListEmployee = ConvertDataTable<Employee>(xEmployeeClass.CurentListEmployee());
-        //    //JavaScriptSerializer jsonSerialiser = new JavaScriptSerializer();
-        //    //xresult = jsonSerialiser.Serialize(ListEmployee);
 
-        //    DataTable dt = xEmployeeClass.CurentListEmployee();
-        //    List<DataRow> list = dt.AsEnumerable().ToList();
-        //    JavaScriptSerializer jsonSerialiser = new JavaScriptSerializer();
-        //    xresult = jsonSerialiser.Serialize(list);
-        //    return xresult;
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true)]
+        public static List<Employee> GetListEmployeeFix()
+        {
+            Employee xEmployeeClass = new Employee();
+            List<Employee> ListEmployee = new List<Employee>();
+            for (int i=0; i<xEmployeeClass.CurentListEmployee().Rows.Count; i++)
+            ListEmployee.Add(new Employee
+            {
+                EmployeeName = xEmployeeClass.CurentListEmployee().Rows[i][0].ToString(),
+                Jobtitle = xEmployeeClass.CurentListEmployee().Rows[i][0].ToString(),
+                Salary = xEmployeeClass.CurentListEmployee().Rows[i][0].ToString()
+            }); 
+            return ListEmployee;
 
-        //}
+        }
 
 
         public static List<Employee> ConvertDataTable<Employee>(DataTable dt)
